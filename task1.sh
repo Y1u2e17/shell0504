@@ -95,12 +95,12 @@ function addSuffix(){
 	replace="s/\./""${2}\./"
 	if [[ -d "${path}" ]];then
 		echo "${path}"
-		cd "${path}" || return 1
+		cd "${path}"
 		rename "${replace}" *
 		cd ..
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
-		cd "${path%/*}"|| return 1
+		cd "${path%/*}" 
 		rename "${replace}" ${path##*/}
 		cd ..
 	fi
@@ -114,12 +114,12 @@ function addPrefix(){
 	replace="s/^/""${2}/"
 	if [[ -d "${path}" ]];then
 		echo "${path}"
-		cd "${path}" || return 1
+		cd "${path}" 
 		rename "${replace}" *
 		cd ..
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
-		cd "${path%/*}" || return 1
+		cd "${path%/*}"
 		rename "${replace}" ${path##*/}
 		cd ..
 	fi
