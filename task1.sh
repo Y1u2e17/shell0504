@@ -152,6 +152,7 @@ function png2jpg(){
 	return 0
 }
 
+
 #############################################
 while [[ -n "${1}" ]];do
 	case "${1}" in
@@ -159,7 +160,7 @@ while [[ -n "${1}" ]];do
 			usehelp
 			;;
 		-f)
-			if [[ "$(#)" == 1 ]];then
+			if [[ "${#}" == 1 ]];then
 				echo "Error: You must choose a file or folder."
 				exit 0
 			elif [[ ! -d "${2}" ]] && [[ ! -f "${2}" ]];then
@@ -208,7 +209,7 @@ while [[ -n "${1}" ]];do
 			png2jpg "${path}"
 			;;
 		*)
-			echo "Error: Not correct option."
+			echo "Erro: Not an option."
 			;;
 	esac
 	shift
