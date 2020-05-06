@@ -3,12 +3,11 @@
 set -e
 
 #脚本文件
-SCRIPT_NAME=$0
 
 #帮助函数
 function usehelp(){
   cat <<END_EOF
-  Usage:bash "${SCRIPT_NAME}" -f <filename|path> [arguments]
+  Usage:bash task1.sh -f <filename|path> [arguments]
   
   Arguments:
   -q <maxSize> <maxWidth> <maxHeight> <quality>  Support for image quality compression of JPEG formatted pictures
@@ -156,7 +155,7 @@ function png2jpg(){
 #############################################
 while [[ -n "${1}" ]];do
 	case "${1}" in
-		-h|--help)
+		-h)
 			usehelp
 			;;
 		-f)
@@ -199,7 +198,7 @@ while [[ -n "${1}" ]];do
 			elif [[ "${position}" == "-s" ]];then
 				addSuffix "${path}" "${replace}" 
 			else
-				echo "Error: You can only choose -p(prefix) of -s(suffix)."
+				echo "Error"
 			fi
 			shift
 			shift
