@@ -96,8 +96,8 @@ function addSuffix(){
 	if [[ -d "${path}" ]];then
 		echo "${path}"
 		cd "${path}" || return 1
-		rename "${replace}" -- *glob*
-	        cd ..
+		rename "${replace}" *
+		cd ..
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
 		cd "${path%/*}" 
@@ -115,7 +115,7 @@ function addPrefix(){
 	if [[ -d "${path}" ]];then
 		echo "${path}" || return 1
 		cd "${path}" 
-		rename "${replace}" -- *glob*
+		rename "${replace}" *
 		cd ..
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
