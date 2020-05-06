@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+set -e
+
 #脚本文件
 SCRIPT_NAME=$0
 
