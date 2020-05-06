@@ -35,15 +35,15 @@ function jpgQualityCompress(){
 		files=$(find "${path}" \( -name "*.jpg" \) -type f -size +"${maxSize}" -exec ls {} \;);
 		for file in ${files};do
 			echo "${file}"
-			echo $(identify "${file}")
+			identify "${file}"
 		        convert -resize "${maxWidth}"x"${maxHeight}" "${file}" -quality "${quality}" "${file}"
-			echo $(identify "${file}")
+			identify "${file}"
 		done
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
-		echo $(identify "${path}")
+		identify "${path}"
 		convert -resize "${maxWidth}"x"${maxHeight}" "${path}" -quality "${quality}" "${path}"
-		echo $(identify "${path}")
+		identify "${path}"
 	fi
 
 	return 0
@@ -57,15 +57,15 @@ function ResolutionCompress(){
 		files=$(find "${path}" \( -name "*.jpg" -or -name "*.png" -or -name "*.svg" \) -type f -exec ls {} \;);
 		for file in ${files};do
 			echo "${file}"
-			echo $(identify "${file}")
+			identify "${file}"
 			convert -resize "${resolution}" "${file}" "${file}"
-			echo $(identify "${file}")
+			identify "${file}"
 		done
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
-		echo $(identify "${path}")
+		identify "${path}"
 		convert -resize "${resolution}" "${path}" "${path}"
-		echo $(identify "${path}")
+		identify "${path}"
 	fi
 
 	return 0
@@ -92,12 +92,12 @@ function addWatermark(){
 #批量重命名-添加文件名后缀
 function addSuffix(){
 	path="${1}"
-	replace="s/\./""${2}\./"
+	replace="s/\.""${3}""$/""${2}"".""${3}""/"
 	if [[ -d "${path}" ]];then
 		echo "${path}"
-		cd "${path}"
-		rename "${replace}" *
-		cd ..
+		cd "${path}" || return 1
+		rename "${replace}" -- *glob*
+	        cd ..
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
 		cd "${path%/*}" 
@@ -113,13 +113,13 @@ function addPrefix(){
 	path="${1}"
 	replace="s/^/""${2}/"
 	if [[ -d "${path}" ]];then
-		echo "${path}"
+		echo "${path}" || return 1
 		cd "${path}" 
-		rename "${replace}" *
+		rename "${replace}" -- *glob*
 		cd ..
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
-		cd "${path%/*}"
+		cd "${path%/*}" || return 1
 		rename "${replace}" ${path##*/}
 		cd ..
 	fi
