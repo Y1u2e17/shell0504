@@ -65,7 +65,7 @@ function ResolutionCompress(){
 		echo "${path}"
 		echo $(identify "${path}")
 		convert -resize "${resolution}" "${path}" "${path}"
-		echo $(identify "${file}")
+		echo $(identify "${path}")
 	fi
 
 	return 0

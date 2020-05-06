@@ -7,7 +7,7 @@ before_install:
 script:
                 - bash task1.sh -h
                 - bash task1.sh -f task1_images -q 1M 1280 1280 80
-                - bash task1.sh -f task1_images/1.jpg -r 50%
+                - bash task1.sh -f task1_images/1.jpg -r 50%x50%
                 - bash task1.sh -f task1_images -w Xudongyue
                 - ls task1_images/
                 - bash task1.sh -f task1_images -a -p pre
