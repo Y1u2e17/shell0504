@@ -208,7 +208,7 @@ while [[ -n "${1}" ]];do
 			png2jpg "${path}"
 			;;
 		*)
-			echo "Error: ${1} is not correct option."
+			echo "Error: Not correct option."
 			;;
 	esac
 	shift
