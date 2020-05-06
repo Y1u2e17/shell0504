@@ -92,12 +92,13 @@ function addWatermark(){
 #批量重命名-添加文件名后缀
 function addSuffix(){
 	path="${1}"
-	replace="s/\.""${3}""$/""${2}"".""${3}""/"
+	replace="s/\./""${2}\./"
 	if [[ -d "${path}" ]];then
 		echo "${path}"
 		cd "${path}" || return 1
 		rename "${replace}" *
 		cd ..
+		pwd
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
 		cd "${path%/*}" 
@@ -117,6 +118,7 @@ function addPrefix(){
 		cd "${path}" 
 		rename "${replace}" *
 		cd ..
+		pwd
 	elif [[ -f "${path}" ]];then
 		echo "${path}"
 		cd "${path%/*}" || return 1
